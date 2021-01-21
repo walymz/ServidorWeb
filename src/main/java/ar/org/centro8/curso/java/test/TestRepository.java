@@ -30,8 +30,8 @@ public class TestRepository {
         cr.getAll().forEach(System.out::println);
         
         System.out.println("===========  SAVE Cliente =================");
-        Cliente cliente = new Cliente("Carolina", "Larez", TipoDocumento.DNI, "66666666", "6666666666","carolina@hotmail.com","Boedo 254");
-        cr.save(cliente);
+        Cliente cliente = new Cliente("Carolina", "Larez", TipoDocumento.DNI, "76666666", "6666666666","carolina@hotmail.com","Boedo 254");
+        cliente=cr.save(cliente);
         System.out.println(cliente);
         
         System.out.println("===========  GETALL DESPUÉS DE SAVE  =================");
@@ -39,8 +39,7 @@ public class TestRepository {
         
         System.out.println("===========  UPDATE Cliente id="+cliente.getId()+" Nombre=Carol =================");
         cliente.setNombre("Carol");
-        if(cr.update(cliente)) System.out.println("El cliente ha sido modificado");
-        cliente = cr.getById(cliente.getId());
+        System.out.println(cr.update(cliente));
         
         System.out.println("===========  GETALL DESPUÉS DEL UPDATE=================");
         cr.getAll().forEach(System.out::println);

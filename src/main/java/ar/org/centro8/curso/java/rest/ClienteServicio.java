@@ -24,7 +24,7 @@ public class ClienteServicio {
    */
    @GET
    @Path("alta")
-   //@Produces(MediaType.APPLICATION_JSON) 
+   @Produces(MediaType.APPLICATION_JSON) 
    public String alta(
            @QueryParam("nombre")String nombre,
            @QueryParam("apellido")String apellido,
@@ -44,9 +44,9 @@ public class ClienteServicio {
           email,
           direccion
     );
-    cr.save(cliente);
-   // return new Gson().toJson(cliente);  
-   return cliente.getId()+"";  
+    //cr.save(cliente);
+    return new Gson().toJson(cr.save(cliente));  
+   //return cliente.getId()+"";  
 }
    @GET
    @Path("baja")
@@ -66,8 +66,7 @@ public class ClienteServicio {
    public String getAll(){
        return new Gson().toJson(cr.getAll());
    }
-   
-   
+    
    @GET
    @Path("likeApellido")
    @Produces(MediaType.APPLICATION_JSON)

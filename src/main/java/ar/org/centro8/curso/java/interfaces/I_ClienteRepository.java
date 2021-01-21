@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface I_ClienteRepository {
-    boolean save(Cliente cliente);
+    Cliente save(Cliente cliente);
     boolean remove(Cliente cliente);
-    boolean update(Cliente cliente);
+    Cliente update(Cliente cliente);
     default Cliente getById(int id){
         return getAll()
                 .stream()

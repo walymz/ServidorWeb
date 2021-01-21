@@ -40,8 +40,7 @@ public class ClienteRepository implements I_ClienteRepository{
     }
 
     @Override
-    public boolean save(Cliente cliente) {
-      boolean result=false;  
+    public Cliente save(Cliente cliente) {
       if(cliente!=null){
         try(PreparedStatement ps = conn.prepareStatement(
                 "insert into clientes "
@@ -59,14 +58,14 @@ public class ClienteRepository implements I_ClienteRepository{
                     ResultSet rs = ps.getGeneratedKeys();
                     if(rs.next()){ 
                         cliente.setId(rs.getInt(1));
-                        result=true;
                     }
 
             }catch(Exception e){
                 e.printStackTrace();
+                cliente=null;
             }
       }
-    return result;    
+      return cliente;
     }
 
     @Override
@@ -85,8 +84,8 @@ public class ClienteRepository implements I_ClienteRepository{
     }
 
     @Override
-    public boolean update(Cliente cliente) {
-       boolean result=false;
+    public Cliente update(Cliente cliente) {
+     //  boolean result=false;
        if(cliente!=null){
             try (PreparedStatement ps = conn.prepareStatement("update clientes set nombre=?, apellido=?, tipoDocumento=?, numeroDocumento=?, telefono=?, email=?, direccion=? where id=?")) {
                 ps.setString(1, cliente.getNombre());
@@ -98,11 +97,12 @@ public class ClienteRepository implements I_ClienteRepository{
                 ps.setString(7, cliente.getDireccion());
                 ps.setInt(8, cliente.getId());
                 ps.execute();
-                result=true;
+             
             } catch (Exception e) {
                 e.printStackTrace();
+                cliente=null;
             } 
-        }  
-       return result;
+        }
+       return cliente;
     }
 }
